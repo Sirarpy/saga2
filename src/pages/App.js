@@ -1,3 +1,4 @@
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
 
     return (
         <div>
-            <button onClick={ () => dispatch({type: "LOAD_DATA"})}>click</button>
+            app
         </div>
     );
 }

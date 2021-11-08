@@ -7,8 +7,9 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     reducer,
     //for extention in the browser
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-        applyMiddleware(sagaMiddleware))
+
+    // window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+    //     applyMiddleware(sagaMiddleware))
 )
 // Dynamically run saga.
 // Can be used to run Sagas only after the applyMiddleware phase.
