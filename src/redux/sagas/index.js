@@ -1,22 +1,30 @@
 import {fork, spawn, call, all, delay} from 'redux-saga/effects'
-import {loadBasicData} from "./initialSagas";
+import loadBasicData from "./initialSagas";
+import pageLoaderSaga from "./pageLoader";
 
 export default function* rootSaga() {
-    const sagas = [loadBasicData]
+
+    const sagas = [
+        loadBasicData,
+        pageLoaderSaga
+    ]
 
     const retrySagas = yield sagas.map(saga => {
         return spawn(function* () {
             while (true) {
                 try {
+                    // call blocked method
                     yield call(saga);
-                    break
+                    break;
                 } catch (e) {
                     console.log(e)
                 }
-
             }
         })
     })
+
+    // runs all tasks parallel
+    // if there is one blocked task, all will be blocked
     yield all(retrySagas)
 }
 
@@ -33,10 +41,15 @@ export default function* rootSaga() {
 // saga2(),
 // saga3(),
 // ]
+
 //  // 2-  second
+// yield [
 // fork(saga1);
 // fork(saga2);
 // fork(saga3);
+// ]
+
+// or
 
 // // 3- third way
 // fork depends on parent tasks

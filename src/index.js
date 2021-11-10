@@ -1,28 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {createBrowserHistory} from "history";
+import {Route, Switch, Router} from "react-router-dom";
+import {ConnectedRouter} from "connected-react-router";
 import App from './pages/App';
-import Blog from "./pages/bloge";
-import NotFound from "./pages/notFound";
-
+import Blog from "./pages/Bloge";
+import NotFound from "./pages/NotFound";
 import store from "./redux";
-
-const history = createBrowserHistory();
+import {history} from "./redux/reducers";
 
 ReactDOM.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <Provider store={store}>
-            <Router history={{history}}>
-                <Routes>
-                    <Route exact path="/" element={<App/>}/>
-                    <Route exact path="/blog" element={<Blog/>}/>
-                    <Route exact path="*" element={<NotFound/>}/>
-                </Routes>
-            </Router>
-        </Provider>
-    </React.StrictMode>,
+            <ConnectedRouter history={history}>
+                <Switch>
+                    <Route path='/' exact>
+                        <App />
+                    </Route>
+                    <Route path='/blog' exact>
+                        <Blog />
+                    </Route>
+                    <Route path='*' exact>
+                        <NotFound />
+                    </Route>
+                </Switch>
+            </ConnectedRouter>
+        </Provider>,
+    // </React.StrictMode>,
     document.getElementById('root')
 );
 
