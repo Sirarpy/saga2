@@ -12,7 +12,7 @@ function App() {
             app
             <div>
                 <Link to={'./blog'}>
-                    open blog
+                    new add page
                 </Link>
             </div>
         </div>
