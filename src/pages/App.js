@@ -1,11 +1,10 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import {getAction} from "connected-react-router";
 
 function App() {
     const store = useSelector(store => store)
-    const dispatch = useDispatch()
-    console.log("store - ", store)
 
     return (
         <div>

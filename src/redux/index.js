@@ -4,7 +4,7 @@ import {routerMiddleware} from "connected-react-router";
 import reducer, {history} from "./reducers";
 import rootSaga from "./sagas";
 
-const sagaMiddlewares = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     reducer,
@@ -13,7 +13,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
         applyMiddleware(
             routerMiddleware(history),
-            sagaMiddlewares
+            sagaMiddleware
         )
     )
 )
@@ -21,6 +21,7 @@ const store = createStore(
 // Dynamically run saga.
 // Can be used to run Sagas only after the applyMiddleware phase.
 // passed function rootSaga must be generator
-sagaMiddlewares.run(rootSaga)
+
+sagaMiddleware.run(rootSaga)
 
 export default store

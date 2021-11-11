@@ -6,14 +6,14 @@ function* loadBlogData() {
     // const data = yield call([request, request.json])
     // or
     const data = yield apply(request, request.json)
-    // console.log("blog data - ", data)
+
     yield put({type: 'BLOG_LOADED', payload: data});
 }
 
 export default function* pageLoaderSaga() {
     while (true) {
         const action = yield take(LOCATION_CHANGE)
-        console.log(">>", action)
+        // console.log(">>", action)
         if (action.payload.location.pathname.endsWith('blog')) {
             yield fork(loadBlogData)
         }
